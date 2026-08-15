@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Genomics & Drug Discovery Dashboard</title>
+    <!-- Tailwind CSS for modern interface styling -->
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+
+    <!-- Header Section -->
+    <header class="border-b border-slate-800 bg-slate-950 p-6 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-teal-400">OncoGenix Precision Dashboard</h1>
+                <p class="text-sm text-slate-400 mt-1">Clinical Tumor DNA Mutation Screening & Drug Matching Infrastructure</p>
+            </div>
+            <span class="px-3  bg-teal-500/10 text-teal-400 border border-teal-500/20 text-xs font-semibold rounded-full py-1">v2.4 Core Analytics Engine</span>
+        </div>
+    </header>
+
+    <!-- Main Grid Workspace -->
+    <main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- Left Column: Patient Genomic Sequence Profiles -->
+        <div class="lg:col-span-2 bg-slate-950 p-6 rounded-xl border border-slate-800 shadow-xl">
+            <h2 class="text-lg font-semibold text-slate-200 mb-4 flex items-center gap-2">🧬 Patient Cohort Genomic Registry</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-800 text-slate-400 text-xs tracking-wider uppercase bg-slate-900/50">
+                            <th class="p-3">Patient ID</th>
+                            <th class="p-3">Oncology Target</th>
+                            <th class="p-3">Tumor DNA Sequence (Exon 19 Fragment)</th>
+                            <th class="p-3 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-slate-800/50">
+                        <tr class="hover:bg-slate-900/30">
+                            <td class="p-3 font-mono text-teal-500">#PT-2094</td>
+                            <td class="p-3 font-medium">Non-Small Cell Lung Cancer</td>
+                            <td class="p-3 font-mono text-xs tracking-widest text-rose-400 bg-rose-500/5 rounded px-2">ATGC<span class="font-bold underline text-rose-300">CGAA</span>GCTAGC</td>
+                            <td class="p-3 text-right"><button onclick="runAnalytics('#PT-2094', 'ATGCGCGAAGCTAGC', 'Lung')" class="px-3 py-1 bg-teal-600 hover:bg-teal-500 text-xs font-semibold rounded-lg shadow transition">Run Screening</button></td>
+                        </tr>
+                        <tr class="hover:bg-slate-900/30">
+                            <td class="p-3 font-mono text-teal-500">#PT-8812</td>
+                            <td class="p-3 font-medium">Metastatic Melanoma</td>
+                            <td class="p-3 font-mono text-xs tracking-widest text-slate-400 bg-slate-500/5 rounded px-2">ATGC<span class="font-bold underline text-amber-300">TGAG</span>GCTAGC</td>
+                            <td class="p-3 text-right"><button onclick="runAnalytics('#PT-8812', 'ATGCTGAGGCTAGC', 'Melanoma')" class="px-3 py-1 bg-teal-600 hover:bg-teal-500 text-xs font-semibold rounded-lg shadow transition">Run Screening</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Embedded Mini Literature Review/Research Notes -->
+            <div class="mt-8 bg-slate-900/60 p-4 rounded-lg border border-slate-800/80">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">📊 Translational Research Foundations</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    According to modern clinical literature, genetic mutations in kinase domains alter binding site thermodynamics. Specifically, the <span class="text-rose-400 font-mono">CGAA</span> motif creates a conformational change that locks standard therapeutic agents out. This clinical simulation relies on matching sequence variations against active chemical scaffold registries to prevent drug resistance profiling failures.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Column: Interactive Analytics & Drug Discovery Output -->
+        <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 shadow-xl flex flex-col justify-between">
+            <div>
+                <h2 class="text-lg font-semibold text-slate-200 mb-4 flex items-center gap-2">🔬 Clinical Drug Matcher Engine</h2>
+                
+                <div id="welcome-message" class="text-center py-12 text-slate-500 text-sm">
+                    <p>Select a patient registry cohort to run deep genomic analytics and target drug discovery matching matrices.</p>
+                </div>
+
+                <div id="analytics-result" class="hidden space-y-6">
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-800">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider block mb-1">Active Patient Session</span>
+                        <div class="text-xl font-bold font-mono text-teal-400" id="res-id"></div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider block">Identified Variant Biomarker</span>
+                        <div class="p-3 bg-slate-900 rounded-lg border font-mono text-sm" id="res-mutation"></div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-xs text-slate-400 uppercase tracking-wider block">Matched Targeted Small-Molecule</span>
+                        <div class="p-4 bg-teal-950/40 rounded-lg border border-teal-800/60" id="res-drug"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800/60 pt-4 mt-6 text-center text-[10px] text-slate-500">
+                OncoGenix Pipeline Simulator Engine • Designed for Academic Profile Showcases
+            </div>
+        </div>
+    </main>
+
+    <!-- Analytics Dashboard Interaction Scripts -->
+    <script>
+        // Internal Drug Discovery Database
+        const DRUG_MUTATION_INDEX = {
+            "CGAA": { name: "Osimertinib Scaffolding Variant X", class: "EGFR Tyrosine Kinase Inhibitor", mechanism: "Selectively targets mutated cells with high affinity to prevent ATP-binding site mutations.", efficacy: "94.2% Clinical Simulation Success" },
+            "TGAG": { name: "Vemurafenib Complex B", class: "BRAF V600E Structural Antagonist", mechanism: "Allosterically blocks mutated BRAF kinase signalling cascades to suppress tumor expansion pathways.", efficacy: "88.7% Clinical Simulation Success" }
+        };
+
+        function runAnalytics(patientId, sequence, cancerType) {
+            document.getElementById('welcome-message').classList.add('hidden');
+            const resultBox = document.getElementById('analytics-result');
+            resultBox.classList.remove('hidden');
+
+            // Find the sub-string sequence containing the mutation window
+            let mutationFound = "Unknown Sequence Structuring";
+            let matchedDrug = { name: "No Viable Match", class: "Cytotoxic Chemotherapy Default", mechanism: "Standard broad range mitigation strategy due to missing custom bio-targets.", efficacy: "N/A" };
+            
+            if (sequence.includes("CGAA")) {
+                mutationFound = "Exon 19 In-Frame Deletion Alternative (CGAA Motif Detected)";
+                matchedDrug = DRUG_MUTATION_INDEX["CGAA"];
+                document.getElementById('res-mutation').className = "p-3 bg-rose-950/20 text-rose-400 border border-rose-900/50 rounded-lg font-mono text-sm";
+            } else if (sequence.includes("TGAG")) {
+                mutationFound = "BRAF V600E Point Substitution Alternative (TGAG Motif Detected)";
+                matchedDrug = DRUG_MUTATION_INDEX["TGAG"];
+                document.getElementById('res-mutation').className = "p-3 bg-amber-950/20 text-amber-400 border border-amber-900/50 rounded-lg font-mono text-sm";
+            }
+
+            document.getElementById('res-id').innerText = patientId + " (" + cancerType + " Sample)";
+            document.getElementById('res-mutation').innerText = mutationFound;
+            
+            document.getElementById('res-drug').innerHTML = `
+                <div class="text-teal-400 font-bold text-base">${matchedDrug.name}</div>
+                <div class="text-slate-300 text-xs font-medium mt-0.5">${matchedDrug.class}</div>
+                <p class="text-slate-400 text-xs mt-2 leading-relaxed">${matchedDrug.mechanism}</p>
+                <div class="mt-3 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded px-2 py-1 inline-block">${matchedDrug.efficacy}</div>
+            `;
+        }
+    </script>
+</body>
+</html>
